@@ -35,11 +35,30 @@ describe("Match", function() {
   });
 
   describe("getStrikeScore", function() {
-    it("should accept frameId as parameter to get strike status extra score when frameId < 9.", function() {
+    it("should accept frameId as parameter to get  extra score of strike status.", function() {
       var theMatch2 = new Match();
       var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
       theMatch2.scaner(scoreStr);
       expect(theMatch2.getStrikeScore(8)).toBe(20);
+      expect(theMatch2.getStrikeScore(9)).toBe(18);
+      expect(theMatch2.getStrikeScore(10)).toBe(9);
     });
   });
+
+  describe("getSpareScore", function() {
+    it("should accept frameId as parameter to get extra score of spare status.", function() {
+      var theMatch2 = new Match();
+      var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
+      theMatch2.scaner(scoreStr);
+      expect(theMatch2.getSpareScore(2)).toBe(9);
+      expect(theMatch2.getSpareScore(6)).toBe(0);
+
+      var theMatch3 = new Match();
+      var scoreStr = '5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5';
+      theMatch3.scaner(scoreStr);
+      expect(theMatch3.getSpareScore(2)).toBe(5);
+      expect(theMatch3.getSpareScore(10)).toBe(5);
+    });
+  });
+
 });
