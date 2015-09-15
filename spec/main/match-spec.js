@@ -35,7 +35,7 @@ describe("Match", function() {
   });
 
   describe("getStrikeScore", function() {
-    it("should accept frameId as parameter to get strike status extra score.", function() {
+    it("should accept frameId as parameter to get strike status extra score when frameId < 9.", function() {
       var theMatch2 = new Match();
       var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
       theMatch2.scaner(scoreStr);
