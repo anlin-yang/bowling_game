@@ -1,5 +1,6 @@
 var Frame = require('./frame.js');
 var Chance = require('./chance.js');
+var _ = require('lodash');
 
 function Match() {
   this.frames = [];
@@ -27,4 +28,25 @@ Match.prototype.scaner = function(matchScoreStr) {
     that.extraChances.push(new Chance(index + 1, val));
   });
 }
+
+Match.prototype.getStrikeScore = function(frameId) {
+  var strikeExtraScore = 0;
+  var i = 0;
+  while (i < 2) {
+    var nextFrameId = frameId + i + 1;
+    if (nextFrameId > 10) {
+      strikeExtraScore += +this.extraChances[nextFrameId % 10 - 1].valueChar;
+    } else {
+      var nextFrame = _.find(this.frames, function(val) {
+        return val.frameId === nextFrameId;
+      });
+      nextFrame.chances.forEach(function(item) {
+        strikeExtraScore += item.score;
+      });
+      i += nextFrame.chances.length;
+    }
+  }
+  return strikeExtraScore;
+}
+
 module.exports = Match;
