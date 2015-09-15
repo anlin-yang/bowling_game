@@ -36,6 +36,7 @@ Match.prototype.getStrikeScore = function(frameId) {
     var nextFrameId = frameId + i + 1;
     if (nextFrameId > 10) {
       strikeExtraScore += +this.extraChances[nextFrameId % 10 - 1].valueChar;
+      i++;
     } else {
       var nextFrame = _.find(this.frames, function(val) {
         return val.frameId === nextFrameId;
@@ -47,6 +48,18 @@ Match.prototype.getStrikeScore = function(frameId) {
     }
   }
   return strikeExtraScore;
-}
+};
 
+Match.prototype.getSpareScore = function(frameId) {
+  var spareExtraScore = 0;
+  if (frameId === 10) {
+    spareExtraScore += +this.extraChances[0].valueChar;
+  } else {
+    var nextFrame = _.find(this.frames, function(val) {
+      return val.frameId === frameId + 1;
+    });
+    spareExtraScore += nextFrame.chances[0].score;
+  }
+  return spareExtraScore;
+};
 module.exports = Match;
