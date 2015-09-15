@@ -16,4 +16,14 @@ Frame.prototype.addChance = function() {
   });
 };
 
+Frame.prototype.setChanceScore = function() {
+  var that = this;
+  this.chances.forEach(function(val) {
+    val.valueChar === 'X' && val.setScore(10);
+    val.valueChar === '-' && val.setScore(0);
+    val.valueChar === '/' && val.setScore(10 - +that.chances[0].valueChar);
+    /[1-9]/.test(val.valueChar) && val.setScore(+val.valueChar);
+  });
+};
+
 module.exports = Frame;
