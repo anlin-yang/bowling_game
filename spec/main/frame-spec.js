@@ -26,4 +26,15 @@ describe("Frame", function() {
     });
   });
 
+  describe("getFrameScore", function() {
+    it("should get correct frame score include all chances of frame.", function() {
+      expect(theFrame.getFrameScore()).toBe(10);
+
+      var theFrame2 = new Frame(2, '-7');
+      theFrame2.addChance();
+      theFrame2.setChanceScore();
+      expect(theFrame2.getFrameScore()).toBe(7);
+    });
+  });
+
 });
