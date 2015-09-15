@@ -33,4 +33,13 @@ describe("Match", function() {
       expect(theMatch3.extraChances.length).toBe(0);
     });
   });
+
+  describe("getStrikeScore", function() {
+    it("should accept frameId as parameter to get strike status extra score.", function() {
+      var theMatch2 = new Match();
+      var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
+      theMatch2.scaner(scoreStr);
+      expect(theMatch2.getStrikeScore(8)).toBe(20);
+    });
+  });
 });
