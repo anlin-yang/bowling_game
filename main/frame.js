@@ -26,4 +26,12 @@ Frame.prototype.setChanceScore = function() {
   });
 };
 
+Frame.prototype.getFrameScore = function() {
+  var frameScore = 0;
+  this.chances.forEach(function(val) {
+    frameScore += val.score;
+  });
+  return frameScore;
+};
+
 module.exports = Frame;
