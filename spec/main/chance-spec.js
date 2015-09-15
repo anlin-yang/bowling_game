@@ -8,4 +8,12 @@ describe("Chance", function() {
       expect(theChance.valueChar).toBe('X');
     });
   });
+
+  describe("setScore", function() {
+    it("should set score to attribute of object chance.", function() {
+      var theChance = new Chance(1, 'X');
+      theChance.setScore(10);
+      expect(theChance.score).toBe(10);
+    });
+  });
 });
