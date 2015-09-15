@@ -10,4 +10,11 @@ describe("Frame", function() {
       expect(theFrame.valueStr).toBe('3/');
     });
   });
+
+  describe("addChance", function() {
+    it("should add object Chance to Frame attribute chances.", function() {
+      theFrame.addChance();
+      expect(theFrame.chances.length).toBe(2);
+    });
+  });
 });
