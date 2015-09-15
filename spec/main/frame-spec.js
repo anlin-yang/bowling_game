@@ -17,4 +17,13 @@ describe("Frame", function() {
       expect(theFrame.chances.length).toBe(2);
     });
   });
+
+  describe("setChanceScore", function() {
+    it("according to valueChar to set correct chance score.", function() {
+      theFrame.setChanceScore();
+      expect(theFrame.chances[0].score).toBe(3);
+      expect(theFrame.chances[1].score).toBe(7);
+    });
+  });
+
 });
