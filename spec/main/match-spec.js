@@ -17,4 +17,20 @@ describe("Match", function() {
       expect(theMatch.frames.length).toBe(2);
     });
   });
+
+  describe("scaner", function() {
+    it("should accept matchScoreStr as parameter to analysis score string and add attribute.", function() {
+      var theMatch2 = new Match();
+      var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
+      theMatch2.scaner(scoreStr);
+      expect(theMatch2.frames.length).toBe(10);
+      expect(theMatch2.extraChances.length).toBe(2);
+
+      var theMatch3 = new Match();
+      scoreStr = '9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||';
+      theMatch3.scaner(scoreStr);
+      expect(theMatch3.frames.length).toBe(10);
+      expect(theMatch3.extraChances.length).toBe(0);
+    });
+  });
 });
