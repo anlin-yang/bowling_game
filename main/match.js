@@ -19,6 +19,16 @@ Match.prototype.addFrame = function(frameId, frameStr) {
   this.frames.push(frame);
 }
 
+Match.prototype.setChanceScore = function() {
+  var that = this;
+  this.extraChances.forEach(function(val) {
+    val.valueChar === 'X' && val.setScore(10);
+    val.valueChar === '-' && val.setScore(0);
+    val.valueChar === '/' && val.setScore(10 - +that.extraChances[0].valueChar);
+    /[1-9]/.test(val.valueChar) && val.setScore(+val.valueChar);
+  });
+};
+
 Match.prototype.scaner = function(matchScoreStr) {
   var framesAndChances = matchScoreStr.split('||');
   var allFrames = framesAndChances[0].split('|');
@@ -31,6 +41,7 @@ Match.prototype.scaner = function(matchScoreStr) {
   extraChances.forEach(function(val, index) {
     that.extraChances.push(new Chance(index + 1, val));
   });
+  this.setChanceScore();
   this.frames.forEach(function(val) {
     val.extraScore = that.getExtraScore(val.frameId, val.status);
   });
@@ -42,7 +53,7 @@ Match.prototype.getStrikeScore = function(frameId) {
   while (i < 2) {
     var nextFrameId = frameId + i + 1;
     if (nextFrameId > 10) {
-      strikeExtraScore += +this.extraChances[nextFrameId % 10 - 1].valueChar;
+      strikeExtraScore += +this.extraChances[nextFrameId % 10 - 1].score;
       i++;
     } else {
       var nextFrame = _.find(this.frames, function(val) {
@@ -86,7 +97,7 @@ Match.prototype.getExtraScore = function(frameId, frameStatus) {
 Match.prototype.getMatchScore = function() {
   var matchScore = 0;
   this.frames.forEach(function(val) {
-    matchScore += (val.getFrameScore + val.extraScore);
+    matchScore += (val.getFrameScore() + val.extraScore);
   });
   return matchScore;
 }
