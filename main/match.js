@@ -62,4 +62,18 @@ Match.prototype.getSpareScore = function(frameId) {
   }
   return spareExtraScore;
 };
+
+Match.prototype.getExtraScore = function(frameId, frameStatus) {
+  var extraScore = 0;
+  switch (frameStatus) {
+    case 'strike':
+      extraScore += this.getStrikeScore(frameId);
+      break;
+    case 'spare':
+      extraScore += this.getSpareScore(frameId);
+      break;
+  }
+  return extraScore;
+};
+
 module.exports = Match;
