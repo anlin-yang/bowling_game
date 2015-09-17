@@ -61,4 +61,16 @@ describe("Match", function() {
     });
   });
 
+  describe("getExtraScore", function() {
+    it("should accept frameId, frameStatus as parameters to get extra score.", function() {
+      var theMatch2 = new Match();
+      var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
+      theMatch2.scaner(scoreStr);
+      expect(theMatch2.getExtraScore(1, 'strike')).toBe(10);
+      expect(theMatch2.getExtraScore(6, 'spare')).toBe(0);
+      expect(theMatch2.getExtraScore(10, 'strike')).toBe(9);
+      expect(theMatch2.getExtraScore(9, 'strike')).toBe(18);
+    });
+  });
+
 });
