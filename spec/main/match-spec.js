@@ -73,4 +73,24 @@ describe("Match", function() {
     });
   });
 
+  describe("getMatchScore", function() {
+    it("should return correct match score.", function() {
+      var theMatch2 = new Match();
+      var scoreStr = 'X|7/|9-|X|-8|8/|-6|X|X|X||81';
+      theMatch2.scaner(scoreStr);
+      expect(theMatch2.getMatchScore()).toBe(167);
+
+      var theMatch3 = new Match();
+      scoreStr = '9-|9-|9-|9-|9-|9-|9-|9-|9-|9-|| ';
+      theMatch3.scaner(scoreStr);
+      expect(theMatch3.getMatchScore()).toBe(90);
+
+      var theMatch4 = new Match();
+      scoreStr = 'X|X|X|X|X|X|X|X|X|X||XX';
+      theMatch4.scaner(scoreStr);
+      expect(2).toBe(2)
+      expect(theMatch4.getMatchScore()).toBe(300);
+    });
+  });
+
 });
