@@ -34,7 +34,6 @@ Match.prototype.scaner = function(matchScoreStr) {
   var allFrames = framesAndChances[0].split('|');
   var extraChances = framesAndChances[1].split('');
   var that = this;
-
   allFrames.forEach(function(val, index) {
     that.addFrame(index + 1, val);
   });
@@ -45,6 +44,7 @@ Match.prototype.scaner = function(matchScoreStr) {
   this.frames.forEach(function(val) {
     val.extraScore = that.getExtraScore(val.frameId, val.status);
   });
+  return this.getMatchScore();
 }
 
 Match.prototype.getStrikeScore = function(frameId) {
