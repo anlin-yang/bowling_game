@@ -9,7 +9,11 @@ function Match() {
 }
 
 Match.prototype.addFrame = function(frameId, frameStr) {
-  var frame = new Frame(frameId, frameStr);
+  var status = '';
+
+  frameStr.indexOf('X') !== -1 && (status = 'strike');
+  frameStr.indexOf('/') !== -1 && (status = 'spare');
+  var frame = new Frame(frameId, frameStr, status);
   frame.addChance();
   frame.setChanceScore();
   this.frames.push(frame);

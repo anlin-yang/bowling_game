@@ -1,11 +1,12 @@
 var Chance = require('./chance.js');
 
-function Frame(frameId, valueStr) {
+function Frame(frameId, valueStr, status) {
   this.frameId = frameId;
   this.valueStr = valueStr;
   this.score = 0;
   this.chances = [];
   this.extraScore = 0;
+  this.status = status;
 }
 
 Frame.prototype.addChance = function() {
